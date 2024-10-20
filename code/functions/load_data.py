@@ -29,24 +29,27 @@ def load_diabetes_data(path = "../data/samadult.csv"):
     diabetes["family_history_diabetes"] = (diabetes["DIBREL"] == 1).astype(int)
     # create had_high_cholesterol
     diabetes["had_high_cholesterol"] = (diabetes["CHLYR"] == 1).astype(int)
-   
+    # create kidney condition
+    diabetes["kidney_condition"] = (diabetes["KIDWKYR"] == 1).astype(int)
+    # create liver condition
+    diabetes["liver_condition"] = (diabetes["LIVYR"] == 1).astype(int)
+    # create smoker
+    diabetes["smoker"] = (diabetes["SMKEV"] == 1).astype(int)
+    
     
     # rename remaining relevant columns
     diabetes = diabetes.rename(columns={"AGE_P": "age",
-                                      "SMKEV": "smoker",
-                                      "SEX": "sex",
-                                      "AWEIGHTP": "weight",
-                                      "AHEIGHT": "height",
-                                      "WRKCATA": "class_of_worker",
-                                      "YRSWRKPA": "years_on_job",
-                                      "EVERWRK": "ever_worked",
-                                      "ONEJOB": "more_than_one_job",
-                                      "KIDWKYR": "kidney_condition", #weak/failing
-                                      "LIVYR": "liver_condition",
-                                      "AHCAFYR1": "cant_afford_meds",
-                                      "ARX12_1": "skipped_meds",
-                                      "MRACRPI2": "non_hispanic_race",
-                                      "HISPAN_I": "hispanic"})
+                                          "SEX": "sex",
+                                          "AWEIGHTP": "weight",
+                                          "AHEIGHT": "height",
+                                          "WRKCATA": "class_of_worker",
+                                          "YRSWRKPA": "years_on_job",
+                                          "EVERWRK": "ever_worked",
+                                          "ONEJOB": "more_than_one_job",
+                                          "AHCAFYR1": "cant_afford_meds",
+                                          "ARX12_1": "skipped_meds",
+                                          "MRACRPI2": "non_hispanic_race",
+                                          "HISPAN_I": "hispanic"})
 
     # select just the relevant columns
     diabetes = diabetes[["house_family_person_id",
