@@ -49,7 +49,8 @@ def load_diabetes_data(path = "../data/samadult.csv"):
                                           "AHCAFYR1": "cant_afford_meds",
                                           "ARX12_1": "skipped_meds",
                                           "MRACRPI2": "non_hispanic_race",
-                                          "HISPAN_I": "hispanic"})
+                                          "HISPAN_I": "hispanic",
+                                          "AHCPLKND": "primary_care"})
 
     # select just the relevant columns
     diabetes = diabetes[["house_family_person_id",
@@ -74,7 +75,8 @@ def load_diabetes_data(path = "../data/samadult.csv"):
                         "cant_afford_meds",
                         "skipped_meds",
                         "non_hispanic_race",
-                        "hispanic"]]
+                        "hispanic",
+                        "primary_care"]]
 
     diabetes.fillna("MISSING", inplace = True)
     
