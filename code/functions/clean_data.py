@@ -63,11 +63,15 @@ def clean_feature_data(df):
     df_clean.loc[df_clean['weight'] >= 300, 'weight'] = np.nan
     df_clean.loc[df_clean['height'] >= 77, 'height'] = np.nan
     
+    df_clean['years_on_job'] = df_clean['years_on_job'].replace({'MISSING':0})
+    df_clean.loc[df_clean['years_on_job'] >= 95, 'years_on_job'] = np.nan
+    
     #imputing Nan values weight and height
     #stratified median for imputation based on 'sex', 'non_hispanic_race', 'hispanic' for more accurate representation of skewed values
     df_clean['weight'] = df_clean.groupby(['sex', 'non_hispanic_race', 'hispanic'])['weight'].transform(lambda x: x.fillna(x.median()))
     df_clean['height'] = df_clean.groupby(['sex', 'non_hispanic_race', 'hispanic'])['height'].transform(lambda x: x.fillna(x.median()))
-    
+    df_clean['years_on_job'] = df_clean.groupby(['sex', 'class_of_worker'])['years_on_job'].transform(lambda x: x.fillna(x.median()))
+
     # New BMI
     df_clean['bmi'] = df_clean['weight'] / (df_clean['height'] ** 2)*703
     df_clean['bmi'] = df_clean['bmi'].round(2)
