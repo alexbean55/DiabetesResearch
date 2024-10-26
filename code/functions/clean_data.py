@@ -68,8 +68,8 @@ def clean_feature_data(df):
     
     #imputing Nan values weight and height
     #stratified median for imputation based on 'sex', 'non_hispanic_race', 'hispanic' for more accurate representation of skewed values
-    df_clean['weight'] = df_clean.groupby(['sex', 'non_hispanic_race', 'hispanic'])['weight'].transform(lambda x: x.fillna(x.median()))
-    df_clean['height'] = df_clean.groupby(['sex', 'non_hispanic_race', 'hispanic'])['height'].transform(lambda x: x.fillna(x.median()))
+    df_clean['weight'] = df_clean.groupby(['sex', 'non_hispanic_race'])['weight'].transform(lambda x: x.fillna(x.median()))
+    df_clean['height'] = df_clean.groupby(['sex', 'non_hispanic_race'])['height'].transform(lambda x: x.fillna(x.median()))
     df_clean['years_on_job'] = df_clean.groupby(['sex', 'class_of_worker'])['years_on_job'].transform(lambda x: x.fillna(x.median()))
 
     # New BMI
@@ -79,7 +79,7 @@ def clean_feature_data(df):
     for key, value in mapping_dict.items():
         df_clean[key] = df_clean[key].map(value)
 
-    age_bins = [18, 25, 35, 45, 55, 65, 75, 85]
+    age_bins = [15, 25, 35, 45, 55, 65, 75, 85]
     age_labels = ['Young Adult (18-25)', 'Emerging Adulthood (26-35)', 
                   'Early Middle Age (36-45)', 'Midlife (46-55)', 
                   'Late Middle Age (56-65)', 'Early Senior (66-75)', 
