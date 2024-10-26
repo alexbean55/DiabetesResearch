@@ -87,5 +87,6 @@ def clean_feature_data(df):
     
     # Apply life stage categorization
     df_clean['age_group'] = pd.cut(df_clean['age'], bins=age_bins, labels=age_labels)
+    
 
     return df_clean
